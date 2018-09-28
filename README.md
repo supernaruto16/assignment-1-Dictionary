@@ -2,6 +2,8 @@
 ## Team member
 - Nguyễn Đình Đại
 - Đinh Quang Vũ
+## Introduction
+- Run file: Application.java
 ## Update
 - Version 1 (completed)
 - Version 2 (in progress)
