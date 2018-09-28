@@ -3,7 +3,7 @@
 - Nguyễn Đình Đại
 - Đinh Quang Vũ
 ## Introduction
-- Run file: Application.java
+- **Run file:** Application.jar
 ## Update
 - Version 1 (completed)
 - Version 2 (in progress)
