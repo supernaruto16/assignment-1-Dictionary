@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
+
 public class DictionaryManagement {
     public static void insertFromCommandline(Dictionary dict) {
         Scanner scanner = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class DictionaryManagement {
     public static void insertFromFile(Dictionary dict) throws IOException {
         FileReader input = null;
         try {
-            input = new FileReader("D:/Java Project/OOPBigProject/src/dictionary.txt");
+            input = new FileReader("dictionary.txt");
             char ch, tab  = '\t', endln = '\n', endf = (char)(-1);
             String word_target, word_explain;
             while(true) {
@@ -36,5 +37,22 @@ public class DictionaryManagement {
                 if(input != null)
                     input.close();
         }
+    }
+
+    public static Word dictionaryLookup(Dictionary dict) {
+        Scanner scanner = new Scanner(System.in);
+        String word_target = scanner.nextLine();
+        Word resultWord = new Word("", "");
+        for(Word word : dict.getWordList()) {
+            if(word_target.equals(word.getWord_target()))
+                resultWord = word;
+        }
+        if(resultWord.getWord_target() == "") {
+            System.out.println("Word not found !!!");
+        }
+        else {
+            System.out.println(resultWord.getWord_target() + "\t" + resultWord.getWord_explain());
+        }
+        return resultWord;
     }
 }
