@@ -1,19 +1,33 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.*;
 
 public class DictionaryManagement {
+
     public static void insertFromCommandline(Dictionary dict) {
         Scanner scanner = new Scanner(System.in);
         int numWord = Integer.parseInt(scanner.nextLine());
         for(int i = 0; i < numWord; ++i) {
             String word_target = scanner.nextLine();
             String word_explain = scanner.nextLine();
-            Word newWord = new Word(word_target, word_explain);
-            dict.insertWord(newWord);
+            dict.insertWord(word_target, word_explain);
         }
     }
 
-    public static void insertFromFile(Dictionary dict) throws IOException {
+    public static void removeFromCommandLine(Dictionary dict) {
+        Scanner scanner = new Scanner(System.in);
+        String word_target = scanner.nextLine();
+        dict.removeWord(word_target);
+    }
+
+    public static void replaceFromCommandLine(Dictionary dict) {
+        Scanner scanner = new Scanner(System.in);
+        String word_target = scanner.nextLine();
+        String word_explain = scanner.nextLine();
+        dict.replaceWord(word_target, word_explain);
+    }
+
+    public static void insertFromFile(Dictionary dict){
         FileReader input = null;
         try {
             input = new FileReader("dictionary.txt");
@@ -32,10 +46,14 @@ public class DictionaryManagement {
                 if(ch == endf)
                     break;
             }
-        }finally
-        {
-                if(input != null)
-                    input.close();
+            if(input != null)
+                input.close();
+        }
+        catch(FileNotFoundException err) {
+            System.out.println("File Not Found !!!");
+        }
+        catch(IOException err) {
+            err.printStackTrace();
         }
     }
 
@@ -54,5 +72,25 @@ public class DictionaryManagement {
             System.out.println(resultWord.getWord_target() + "\t" + resultWord.getWord_explain());
         }
         return resultWord;
+    }
+
+    public static void dictionaryExportToFile(Dictionary dict) {
+        Scanner scanner = new Scanner(System.in);
+        String path = scanner.nextLine();
+        ArrayList <Word> wordList = dict.getWordList();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            for (Word word : wordList) {
+                writer.write(word.getWord_target() + "\t" + word.getWord_explain());
+                writer.newLine();
+            }
+            writer.close();
+        }
+        catch (FileNotFoundException err) {
+            System.out.print("File not Found !!!");
+        }
+        catch (IOException err) {
+            err.printStackTrace();
+        }
     }
 }
