@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Storm Dictionary");
-        primaryStage.setScene(new Scene(root, 683, 384));
+        primaryStage.setScene(new Scene(root, 709, 493));
         primaryStage.show();
     }
 
