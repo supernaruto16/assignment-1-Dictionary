@@ -25,6 +25,6 @@ public class DictionaryCommandLine {
     public static ArrayList<Word> dictionarySearcher(Dictionary dict) {
         Scanner scanner = new Scanner(System.in);
         String word_prefix = scanner.nextLine();
-        return dict.searchPrefix(word_prefix);
+        return dict.searchByPrefix(word_prefix);
     }
 }
