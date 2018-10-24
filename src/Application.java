@@ -1,3 +1,4 @@
+import GoogleAPI.Translator;
 import java.util.Scanner;
 import java.io.*;
 
@@ -5,6 +6,8 @@ public class Application {
 
     public static void main(String[] args){
         Dictionary dict = new Dictionary();
+        Word word = new Word("community", "trung");
+        dict.getSound(word);
         int sign = 0;
         do {
             System.out.println("Enter number to control");

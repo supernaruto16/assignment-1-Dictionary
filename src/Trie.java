@@ -1,3 +1,4 @@
+import GoogleAPI.Translator;
 import java.util.ArrayList;
 
 class Node {
@@ -5,7 +6,7 @@ class Node {
     Word word;
     int numWords;
     public Node() {
-        children = new Node[27];
+        children = new Node[60];
         numWords = 0;
         word = null;
     }
@@ -20,8 +21,9 @@ public class Trie {
     public int getIndex(char ch) {
         if(ch == ' ')
             return 26;
-        else
+        if(ch >= 'a' && ch <= 'z')
             return ch - 'a';
+        return ch - 'A' + 27;
     }
 
     public void insertWord(String word_target, String word_explain) {

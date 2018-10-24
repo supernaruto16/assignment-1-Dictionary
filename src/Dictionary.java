@@ -1,3 +1,9 @@
+import GoogleAPI.Translator;
+import GoogleAPI.Audio;
+import javazoom.jl.decoder.JavaLayerException;
+
+import java.io.InputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Dictionary {
@@ -34,7 +40,30 @@ public class Dictionary {
     }
 
     public Word lookUp(String word_target) {
-        return wordList.lookUp(word_target);
+        Word word = wordList.lookUp(word_target);
+        if(word != null) {
+            return word;
+        }
+        else {
+            Translator translator = new Translator();
+            try {
+                String word_explain = translator.callUrlAndParseResult("en", "vi", word_target);
+                return new Word(word_target, word_explain);
+            }
+            catch (Exception err_2){
+                throw new IllegalArgumentException("Word did not exist");
+            }
+        }
+    }
+
+    public void getSound(Word word) {
+        Audio audio = Audio.getInstance();
+        try {
+            InputStream sound = audio.getAudio(word.getWord_target(), "en");
+            audio.play(sound);
+        } catch (IOException | JavaLayerException err) {
+            err.getMessage();
+        }
     }
 
     public ArrayList<Word> searchByPrefix(String word_prefix) {
